@@ -1,6 +1,7 @@
 spring:
   datasource:
-    url: jdbc:postgresql://${DATABASE_HOST:localhost}:${DATABASE_PORT:5432}/${DATABASE_HOST:springboot_micro_kube}
+    #url: jdbc:postgresql://${DATABASE_HOST:localhost}:${DATABASE_PORT:5432}/${DATABASE_HOST:springboot_micro_kube}
+    url: jdbc:postgresql://${DATABASE_HOST:host.docker.internal}:${DATABASE_PORT:5432}/${DATABASE_HOST:springboot_micro_kube}
     username: ${DATABASE_USERNAME:postgres}
     password: ${DATABASE_PASSWORD:Capge7878}
     driver-class-name: org.postgresql.Driver
