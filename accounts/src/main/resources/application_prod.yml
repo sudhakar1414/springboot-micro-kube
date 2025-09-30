@@ -9,7 +9,7 @@ build:
 accounts:
   message: "Welcome to CapgeBank accounts related PROD APIs"
   contactDetails:
-    name: "Ryan Sin - "
+    name: "Ryan Sin - Product Owner"
     email: "ryan@gmail.com"
   onCallSupport:
     - (111) 777-2938
