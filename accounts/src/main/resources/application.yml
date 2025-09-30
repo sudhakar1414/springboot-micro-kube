@@ -11,8 +11,15 @@ spring:
     jpa.properties.hibernate.format_sql: ${HIBERNATE_FORMAT_SQL:true}
   depends_on:
     - postgres
+  config:
+    import:
+      - "application_qa.yml"
+      - "application_prod.yml"
+  profiles:
+    active:
+      - "qa"
 build:
-  version: "1.0"
+  version: "3.0"
 
 accounts:
   message: "Welcome to CapgeBank accounts related local APIs"
