@@ -1,13 +1,8 @@
-spring:
-  config:
-    activate:
-      on-profile: "prod"
-
 build:
   version: "1.0"
 
-cards:
-  message: "Welcome to CapgeBank cards related PROD APIs"
+loans:
+  message: "Welcome to CapgeBank loans related PROD APIs"
   contactDetails:
     name: "Ryan Sin - Product Owner"
     email: "ryan@gmail.com"
