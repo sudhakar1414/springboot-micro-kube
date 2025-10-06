@@ -1,4 +1,8 @@
 spring:
+  application:
+    name: "cards"
+  profiles:
+    active: "prod"
   datasource:
     url: jdbc:postgresql://${DATABASE_HOST:localhost}:${DATABASE_PORT:5432}/${DATABASE_HOST:springboot_micro_kube}
     #url: jdbc:postgresql://${DATABASE_HOST:host.docker.internal}:${DATABASE_PORT:5432}/${DATABASE_HOST:springboot_micro_kube}
@@ -10,24 +14,7 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     jpa.properties.hibernate.format_sql: ${HIBERNATE_FORMAT_SQL:true}
   config:
-    import:
-      - "application_qa.yml"
-      - "application_prod.yml"
-  profiles:
-    active:
-      - "prod"
+    import: "optional:configserver:http://localhost:8071/"
 
 server:
   port: 9000
-
-build:
-  version: "3.0"
-
-cards:
-  message: "Welcome to CapgeBank cards related local APIs"
-  contactDetails:
-    name: "Sudhakar - Developer"
-    email: "sudhakar@gmail.com"
-  onCallSupport:
-    - (444) 555-1234
-    - (555) 333-7384

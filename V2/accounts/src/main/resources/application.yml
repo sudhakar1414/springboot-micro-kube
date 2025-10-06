@@ -1,4 +1,10 @@
+server:
+  port: 8080
 spring:
+  application:
+    name: "accounts"
+  profiles:
+    active: "prod"
   datasource:
     url: jdbc:postgresql://${DATABASE_HOST:localhost}:${DATABASE_PORT:5432}/${DATABASE_HOST:springboot_micro_kube}
     #url: jdbc:postgresql://${DATABASE_HOST:host.docker.internal}:${DATABASE_PORT:5432}/${DATABASE_HOST:springboot_micro_kube}
@@ -12,20 +18,4 @@ spring:
   depends_on:
     - postgres
   config:
-    import:
-      - "application_qa.yml"
-      - "application_prod.yml"
-  profiles:
-    active:
-      - "qa"
-build:
-  version: "3.0"
-
-accounts:
-  message: "Welcome to CapgeBank accounts related local APIs"
-  contactDetails:
-    name: "Sudhakar - Developer"
-    email: "sudhakar@gmail.com"
-  onCallSupport:
-    - (444) 555-1234
-    - (555) 333-7384
+    import: "optional:configserver:http://localhost:8071/"
