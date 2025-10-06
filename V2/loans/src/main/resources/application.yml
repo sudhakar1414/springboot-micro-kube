@@ -15,5 +15,11 @@ spring:
     jpa.properties.hibernate.format_sql: ${HIBERNATE_FORMAT_SQL:true}
   config:
     import: "optional:configserver:http://localhost:8071/"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
 server:
   port: 8090

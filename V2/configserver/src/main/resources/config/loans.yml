@@ -1,0 +1,14 @@
+server:
+  port: 8090
+
+build:
+  version: "3.0"
+
+loans:
+  message: "Welcome to CapgeBank loans related local APIs"
+  contactDetails:
+    name: "Sudhakar - Developer"
+    email: "sudhakar@gmail.com"
+  onCallSupport:
+    - (444) 555-1234
+    - (555) 333-7384

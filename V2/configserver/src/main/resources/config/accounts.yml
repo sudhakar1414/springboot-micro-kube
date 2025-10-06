@@ -1,0 +1,11 @@
+build:
+  version: "3.0"
+
+accounts:
+  message: "Welcome to CapgeBank accounts related local APIs"
+  contactDetails:
+    name: "Sudhakar - Developer"
+    email: "sudhakar@gmail.com"
+  onCallSupport:
+    - (444) 555-1234
+    - (555) 333-7384

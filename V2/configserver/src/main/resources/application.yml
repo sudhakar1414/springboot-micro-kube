@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: "configserver"
+  profiles:
+    #active: native
+    active: git
+  cloud:
+    config:
+      server:
+        #native:
+         #search-locations: "classpath:/config"
+         #search-locations: "file:///Users//sudhakargutti//Documents//config"
+        git:
+          uri: "https://github.com/sudhakar1414/capgebank-config.git"
+          default-label: main
+          timeout: 5
+          clone-on-start: true
+          force-pull: true
+encrypt:
+  key: "6393DH7F8WCFJDK9284LWIE8373"
+
+server:
+  port: 8071
