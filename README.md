@@ -26,3 +26,11 @@ Docker Command	Description
 "docker run -p 3306:3306 --name accountsdb -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=accountsdb -d mysql"	To create a MySQL DB container
 "docker run -p 6379:6379 --name eazyredis -d redis"	To create a Redis Container
 "docker run -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:22.0.3 start-dev"	To create Keycloak Container
+docker run -d --name accountsdb --network pgnet -e POSTGRES_DB=accountsdb -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=Capge7878 -p 5433:5432 postgres:15
+docker run -d --name pgadmin1 --network pgnet -e PGADMIN_DEFAULT_EMAIL=admin1@example.com -e PGADMIN_DEFAULT_PASSWORD=admin1 -v pgadmin1_data:/var/lib/pgadmin -p 5050:80 dpage/pgadmin4
+
+docker run -d --name cardsdb --network pgnet -e POSTGRES_DB=cardsdb -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=Capge7878 -p 5434:5432 postgres:15
+docker run -d --name pgadmin2 --network pgnet -e PGADMIN_DEFAULT_EMAIL=admin2@example.com -e PGADMIN_DEFAULT_PASSWORD=admin2 -v pgadmin2_data:/var/lib/pgadmin -p 5051:80 dpage/pgadmin4
+
+docker run -d --name loansdb --network pgnet -e POSTGRES_DB=loansdb -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=Capge7878 -p 5435:5432 postgres:15
+docker run -d --name pgadmin3 --network pgnet -e PGADMIN_DEFAULT_EMAIL=admin3@example.com -e PGADMIN_DEFAULT_PASSWORD=admin3 -v pgadmin3_data:/var/lib/pgadmin -p 5052:80 dpage/pgadmin4
