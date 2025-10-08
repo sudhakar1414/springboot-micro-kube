@@ -1,0 +1,101 @@
+services:
+  accountsdb:
+    container_name: accountsdb
+    ports:
+      - 5433:5432
+    environment:
+      POSTGRES_DB: accountsdb
+    extends:
+      file: common-config.yml
+      service: microservice-db-config
+
+  cardsdb:
+    container_name: cardsdb
+    ports:
+      - 5434:5432
+    environment:
+      POSTGRES_DB: cardsdb
+    extends:
+      file: common-config.yml
+      service: microservice-db-config
+
+  loansdb:
+    container_name: loansdb
+    ports:
+      - 5435:5432
+    environment:
+      POSTGRES_DB: loansdb
+    extends:
+      file: common-config.yml
+      service: microservice-db-config
+
+
+  configserver:
+    image: "sudhakar0103/configserver:s7"
+    container_name: configserver-ms
+    ports:
+      - "8071:8071"
+    healthcheck:
+      test: "curl --fail --silent localhost:8071/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    extends:
+      file: common-config.yml
+      service: microservice-base-config
+
+  accounts:
+    image: "sudhakar0103/accounts:s7"
+    container_name: accounts-ms
+    ports:
+      - "8080:8080"
+    depends_on:
+     configserver:
+       condition: service_healthy
+     accountsdb:
+       condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: "accounts"
+      SPRING_DATASOURCE_URL: jdbc:postgresql://accountsdb:5432/accountsdb
+    extends:
+      file: common-config.yml
+      service: microservice-configserver-config
+
+  loans:
+    image: "sudhakar0103/loans:s7"
+    container_name: loans-ms
+    ports:
+      - "8090:8090"
+    depends_on:
+      configserver:
+        condition: service_healthy
+      loansdb:
+        condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: "loans"
+      SPRING_DATASOURCE_URL: jdbc:postgresql://loansdb:5432/loansdb
+    extends:
+      file: common-config.yml
+      service: microservice-configserver-config
+
+  cards:
+    image: "sudhakar0103/cards:s7"
+    container_name: cards-ms
+    ports:
+      - "9000:9000"
+    depends_on:
+      configserver:
+        condition: service_healthy
+      cardsdb:
+        condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: "cards"
+      SPRING_DATASOURCE_URL: jdbc:postgresql://cardsdb:5432/cardsdb
+    extends:
+      file: common-config.yml
+      service: microservice-configserver-config
+
+networks:
+  sudhakar0103:
+    driver: "bridge"
