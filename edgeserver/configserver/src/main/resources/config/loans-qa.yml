@@ -1,0 +1,11 @@
+build:
+  version: "2.0"
+
+loans:
+  message: "Welcome to CapgeBank loans related QA APIs"
+  contactDetails:
+    name: "Jack Smith - QA Lead"
+    email: "jack@gmail.com"
+  onCallSupport:
+    - (222) 364-7374
+    - (333) 938-9273
