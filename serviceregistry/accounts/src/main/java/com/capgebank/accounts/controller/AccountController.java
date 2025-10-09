@@ -80,8 +80,11 @@ public class AccountController {
                     )
             ),
             @ApiResponse(
-                    responseCode = "417",
-                    description = "Exception Failed"
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
             )
     })
     @GetMapping("/fetch")
