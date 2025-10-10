@@ -52,3 +52,9 @@ info:
 
 server:
   port: 8090
+
+logging:
+  level:
+    com:
+      capgebank:
+        loans: DEBUG

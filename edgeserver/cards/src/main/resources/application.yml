@@ -52,3 +52,9 @@ info:
 
 server:
   port: 9000
+
+logging:
+  level:
+    com:
+      capgebank:
+        cards: DEBUG
