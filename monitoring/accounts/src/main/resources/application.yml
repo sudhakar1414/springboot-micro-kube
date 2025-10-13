@@ -15,11 +15,6 @@ spring:
     show-sql: ${JPA_SHOW_SQL:true}
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     jpa.properties.hibernate.format_sql: ${HIBERNATE_FORMAT_SQL:true}
-  sql:
-    init:
-      mode: always
-  depends_on:
-    - postgres
   config:
     import: "optional:configserver:http://localhost:8071/"
   cloud:
@@ -37,20 +32,18 @@ management:
       enabled: true
     liveness-state:
       enabled: true
-
   endpoint:
     shutdown:
-      enabled: true
+      access: unrestricted
     health:
       probes:
         enabled: true
   info:
     env:
       enabled: true
-
-endpoints:
-  shutdown:
-    enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
 
 
 eureka:
@@ -65,14 +58,16 @@ eureka:
 info:
   app:
     name: "accounts"
-    description: "Capge Bank Accounts Application"
+    description: "Eazy Bank Accounts Application"
     version: "1.0.0"
 
 logging:
   level:
     com:
-      capgebank:
+      eazybytes:
         accounts: DEBUG
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
 
 resilience4j.circuitbreaker:
   configs:

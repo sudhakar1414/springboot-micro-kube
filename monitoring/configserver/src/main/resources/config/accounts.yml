@@ -2,10 +2,10 @@ build:
   version: "3.0"
 
 accounts:
-  message: "Welcome to CapgeBank accounts related local APIs"
+  message: "Welcome to EazyBank accounts related local APIs "
   contactDetails:
-    name: "Sudhakar - Developer"
-    email: "sudhakar@gmail.com"
+    name: "John Doe - Developer"
+    email: "john@eazybank.com"
   onCallSupport:
-    - (444) 555-1234
-    - (555) 333-7384
+    - (555) 555-1234
+    - (555) 523-1345

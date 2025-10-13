@@ -5,18 +5,16 @@ spring:
     import: "optional:configserver:http://localhost:8071/"
   cloud:
     gateway:
-      server:
-        webflux:
-          discovery:
-            locator:
-              enabled: true
-              lowerCaseServiceId: true
-          httpclient:
-            connect-timeout: 1000
-            response-timeout: 2s
+      discovery:
+        locator:
+          enabled: false
+          lowerCaseServiceId: true
+      httpclient:
+        connect-timeout: 1000
+        response-timeout: 10s
   data:
     redis:
-      connection-timeout: 2s
+      connect-timeout: 2s
       host: localhost
       port: 6379
       timeout: 1s
@@ -32,18 +30,23 @@ management:
   info:
     env:
       enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
 
 info:
   app:
     name: "gatewayserver"
-    description: "Capge Bank Gateway Server Application"
+    description: "Eazy Bank Gateway Server Application"
     version: "1.0.0"
 
 logging:
   level:
     com:
-      capgebank:
+      eazybytes:
         gatewayserver: DEBUG
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
 
 resilience4j.circuitbreaker:
   configs:
@@ -52,5 +55,4 @@ resilience4j.circuitbreaker:
       permittedNumberOfCallsInHalfOpenState: 2
       failureRateThreshold: 50
       waitDurationInOpenState: 10000
-
 

@@ -2,10 +2,10 @@ build:
   version: "1.0"
 
 cards:
-  message: "Welcome to CapgeBank cards related PROD APIs"
+  message: "Welcome to EazyBank cards related prod APIs "
   contactDetails:
-    name: "Ryan Sin - Product Owner"
-    email: "ryan@gmail.com"
+    name: "Sandra Harald - Product Owner"
+    email: "sandra@eazybank.com"
   onCallSupport:
-    - (111) 777-2938
-    - (555) 646-2884
+    - (617) 432-2356
+    - (936) 564-8721

@@ -2,16 +2,16 @@ spring:
   application:
     name: "configserver"
   profiles:
-    #active: native
+    # active: native
     active: git
   cloud:
     config:
       server:
-        #native:
-         #search-locations: "classpath:/config"
-         #search-locations: "file:///Users//sudhakargutti//Documents//config"
+        # native:
+          # search-locations: "classpath:/config"
+          # search-locations: "file:///Users//eazybytes//Documents//config"
         git:
-          uri: "https://github.com/sudhakar1414/capgebank-config.git"
+          uri: "https://github.com/eazybytes/eazybytes-config.git"
           default-label: main
           timeout: 5
           clone-on-start: true
@@ -31,9 +31,16 @@ management:
     health:
       probes:
         enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
 
 encrypt:
-  key: "6393DH7F8WCFJDK9284LWIE8373"
+  key: "45D81EC1EF61DF9AD8D3E5BB397F9"
 
 server:
   port: 8071
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"

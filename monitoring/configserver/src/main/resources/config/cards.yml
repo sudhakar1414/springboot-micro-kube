@@ -1,14 +1,11 @@
-server:
-  port: 9000
-
 build:
   version: "3.0"
 
 cards:
-  message: "Welcome to CapgeBank cards related local APIs"
+  message: "Welcome to EazyBank cards related local APIs "
   contactDetails:
-    name: "Sudhakar - Developer"
-    email: "sudhakar@gmail.com"
+    name: "Dragos Lech - Developer"
+    email: "dragos@eazybank.com"
   onCallSupport:
-    - (444) 555-1234
-    - (555) 333-7384
+    - (412) 419-3491
+    - (915) 382-1932
