@@ -1,3 +1,4 @@
+/*
 package com.eazybytes.gatewayserver.config;
 
 import org.springframework.core.convert.converter.Converter;
@@ -31,3 +32,4 @@ public class KeycloakRoleConverter implements Converter<Jwt, Collection<GrantedA
     }
 
 }
+*/
