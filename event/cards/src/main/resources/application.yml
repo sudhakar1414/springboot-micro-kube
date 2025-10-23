@@ -6,8 +6,8 @@ spring:
   profiles:
     active: "prod"
   datasource:
-    url: jdbc:postgresql://${DATABASE_HOST:localhost}:${DATABASE_PORT:5434}/${DATABASE_HOST:cardsdb}
-    #url: jdbc:postgresql://${DATABASE_HOST:host.docker.internal}:${DATABASE_PORT:5433}/${DATABASE_HOST:accountsdb}
+    #url: jdbc:postgresql://${DATABASE_HOST:localhost}:${DATABASE_PORT:5434}/${DATABASE_HOST:cardsdb}
+    url: jdbc:postgresql://${DATABASE_HOST:host.docker.internal}:${DATABASE_PORT:5434}/${DATABASE_HOST:cardsdb}
     username: ${DATABASE_USERNAME:postgres}
     password: ${DATABASE_PASSWORD:Capge7878}
     driver-class-name: org.postgresql.Driver

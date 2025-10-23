@@ -1,4 +1,20 @@
 services:
+  rabbit:
+    image: rabbitmq:4.0-management
+    hostname: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    healthcheck:
+      test: rabbitmq-diagnostics check_port_connectivity
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
+    extends:
+      file: common-config.yml
+      service: network-deploy-service
+
   read:
     image: grafana/loki:3.1.2
     command: "-config.file=/etc/loki/config.yaml -target=read"
@@ -215,7 +231,7 @@ services:
       service: network-deploy-service
 
   configserver:
-    image: "eazybytes/configserver:s12"
+    image: "sudhakar0103/configserver:s13"
     container_name: configserver-ms
     ports:
       - "8071:8071"
@@ -232,7 +248,7 @@ services:
       OTEL_SERVICE_NAME: "configserver"
 
   eurekaserver:
-    image: "eazybytes/eurekaserver:s12"
+    image: "sudhakar0103/eurekaserver:s13"
     container_name: eurekaserver-ms
     ports:
       - "8070:8070"
@@ -253,12 +269,14 @@ services:
       OTEL_SERVICE_NAME: "eurekaserver"
 
   accounts:
-    image: "eazybytes/accounts:s12"
+    image: "sudhakar0103/accounts:s13"
     container_name: accounts-ms
     depends_on:
       configserver:
         condition: service_healthy
       eurekaserver:
+        condition: service_healthy
+      rabbit:
         condition: service_healthy
     healthcheck:
       test: "curl --fail --silent localhost:8080/actuator/health/readiness | grep UP || exit 1"
@@ -269,12 +287,13 @@ services:
     environment:
       SPRING_APPLICATION_NAME: "accounts"
       OTEL_SERVICE_NAME: "accounts"
+      SPRING_RABBITMQ_HOST: "rabbit"
     extends:
       file: common-config.yml
       service: microservice-eureka-config
 
   loans:
-    image: "eazybytes/loans:s12"
+    image: "sudhakar0103/loans:s13"
     container_name: loans-ms
     depends_on:
       configserver:
@@ -295,7 +314,7 @@ services:
       service: microservice-eureka-config
 
   cards:
-    image: "eazybytes/cards:s12"
+    image: "sudhakar0103/cards:s13"
     container_name: cards-ms
     depends_on:
       configserver:
@@ -316,7 +335,7 @@ services:
       service: microservice-eureka-config
 
   gatewayserver:
-    image: "eazybytes/gatewayserver:s12"
+    image: "sudhakar0103/gatewayserver:s13"
     container_name: gatewayserver-ms
     ports:
       - "8072:8072"
@@ -333,6 +352,18 @@ services:
     extends:
       file: common-config.yml
       service: microservice-eureka-config
+
+  message:
+    image: "sudhakar0103/message:s13"
+    container_name: message-ms
+    depends_on:
+      rabbit:
+        condition: service_healthy
+    environment:
+      SPRING_RABBITMQ_HOST: "rabbit"
+    extends:
+      file: common-config.yml
+      service: network-deploy-service
 
 networks:
   eazybank:
